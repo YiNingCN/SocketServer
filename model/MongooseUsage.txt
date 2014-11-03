@@ -1,0 +1,6 @@
+QUERY选项任选其一匹配
+this.findOne({$or:[{username:auth},{email:auth}]}, function (err, user){});
+
+查询到之后，user里只包含username 和 password
+this.findOne({username:auth}, 'username password', function (err, user){});
+
