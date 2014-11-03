@@ -6,7 +6,7 @@ var redis = require('socket.io-redis'),
 server.adapter(redis({ host: 'localhost', port: 6379 }));
 
 var user = new models.User({
-  username:'yining2',
+  username:'yining3',
   password:'k593dfpz',
   email:'xstar@qq.com'
 });
@@ -15,7 +15,7 @@ user.save(function(err){
     return console.log(err.msg);
   }
 
-  models.User.auth('yining','k593dfpz', function(err, user, reason){
+  models.User.auth('yining3','k593dfpz', function(err, user, reason){
     if(err){
       return console.log(err.msg);
     }

@@ -5,6 +5,7 @@ var UserSchema = new Schema({
   password: {type:String, required:true, minLength:5, maxLength:36},
   email:{type:String},
   score:{type:Number, default:0},
+  registerAt:{type:Date, default:Date.now},
   lastLogin:{type:Date, default:Date.now},
   lockUntil:{type:Date}
 });
@@ -19,7 +20,7 @@ UserSchema.virtual('getLockUntil').get(function() {
 //用户模型的静态方�?
 //使用用户�?+密码，手机号+密码，UUID等各种方式进行登录�?
 UserSchema.statics.auth=function(auth, password, cb){
-  this.findOne({$or:[{username:auth},{email:auth}]}, function (err, user){
+  this.findOne({username:auth}, function (err, user){
     if(err)
       return cb(err);
     console.log(auth);
@@ -32,7 +33,7 @@ UserSchema.statics.auth=function(auth, password, cb){
     }
 
     if(password != user.password){
-      return cb(null, null, '密码错�??.');
+      return cb(null, null, '密码错�??');
     }
 
     user.lastLogin = Date.now();
